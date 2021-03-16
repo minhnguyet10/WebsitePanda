@@ -1,0 +1,79 @@
+﻿@using Website_Panda.Models;
+
+@{
+
+    Layout = null;
+    var cate = ViewBag.cate as IEnumerable<Category>;
+    var brand = ViewBag.brand as IEnumerable<Brand>;
+   
+}
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <ul class="navbar-nav nav-mega mx-auto">
+        <li class="nav-item active">
+            <a class="nav-link ml-lg-0" href="~/Home/Index">
+                Home
+                <span class="sr-only">(current)</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="~/Home/AllProduct">Products</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/Home/ProductList" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+               aria-expanded="false">
+                Categories
+            </a>
+            <ul class="dropdown-menu mega-menu ">
+                <li>
+                    <div class="row">
+                        <div class="media-list span4 text-left">
+                            <h5 class="tittle-w3layouts-sub"> Choose category! </h5>
+                            <ul>
+
+                                @foreach (var itemcate in cate)
+                                {
+                    <li class="media-mini mt-3">
+                        <a href="/Home/ProductList/@itemcate.CategoryID">@Html.DisplayFor(modelItem => itemcate.CategoryName) </a>
+                    </li>}
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/Home/BrandList" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+               aria-expanded="false">
+                Brands
+            </a>
+            <ul class="dropdown-menu mega-menu ">
+                <li>
+                    <div class="row">
+                        <div class="media-list span4 text-left">
+                            <h5 class="tittle-w3layouts-sub"> Choose brand! </h5>
+                            <ul>
+
+                                @foreach (var itembrand in brand)
+                                {
+                    <li class="media-mini mt-3">
+                        <a href="/Home/ProductBrandList/@itembrand.BrandID">@Html.DisplayFor(modelItem => itembrand.BrandName) </a>
+                    </li>}
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Home/PandaContact">Contact</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Home/BlogList">Blog</a>
+        </li>
+    </ul>
+</div>
+

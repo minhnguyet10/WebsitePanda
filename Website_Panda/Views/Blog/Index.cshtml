@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Website_Panda.Models.Blog>
+
+@{
+    ViewBag.Title = "Blog";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 style="text-align:center">
+                    BLOG
+                </h2>
+            </div>
+            <div class="row form-group">
+                @using (Html.BeginForm("Index", "Blog", FormMethod.Get))
+                {
+                    <div class="col-lg-12">
+                        <a class="btn btn-warning" href="/Blog/Create" style="margin-left:50px; margin-top:20px;">Create New</a>
+                    </div>
+                }
+            </div>
+            <div class="table-responsive">
+                <table id="myTable" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Image)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Title)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Subtitle)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Content)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src='~/Images/@item.Image' style="width:250px; height:150px" alt="Không thể hiển thị ảnh" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Subtitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Content)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreatedDate)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.IDBlog }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.IDBlog }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.IDBlog })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                responsive: true,
+                retrieve: true,
+                "lengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]]
+            });
+
+        });
+    </script>
+}

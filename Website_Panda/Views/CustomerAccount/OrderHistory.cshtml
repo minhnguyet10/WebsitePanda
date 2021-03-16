@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Website_Panda.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "OrderHistory";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    double total = 0;
+}
+    <div class="banner_inner">
+
+        <div class="services-breadcrumb">
+            <div class="inner_breadcrumb">
+
+                <ul class="short">
+                    <li>
+                        <a href="~/Home/Index">Home</a>
+                        <i></i>
+                    </li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+   
+    <div class="container">
+        <h1 class="text-center" style="padding:10px">Order history</h1>
+        <table class="table table-striped table-bordered">
+            <tr class="bg-dark" style="color:white">
+                <th>
+                    ID Order
+                </th>
+                <th>
+                    Order date
+                </th>
+                <th>
+                    Product name
+                </th>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Subtotal
+                </th>
+                <th>
+                   
+                </th>
+            </tr>
+            
+            @foreach (var item in Model)
+            {
+                if(item.Order.Delivered == true) { 
+                <tr>
+                    <td>
+                        @item.IDOrder
+                    </td>
+                    <td>
+                        @item.CreateDay
+                    </td>
+                    <td>
+                        @item.Product.ProductName
+                    </td>
+                    <td>
+                        <img style="width:80px; height:80px;" src="~/Images/@item.Product.Image" />
+                    </td>
+                    <td>
+                        @item.QuantitySale
+                    </td>
+                    <td>
+                        @item.OrderTotalPrice $
+                    </td>
+                    <td>
+                        <div class="checkout-right-basket">
+                            <a href="/Home/ProductDetail/@item.IDProduct" >Reorder</a>
+                        </div>
+                    </td>
+                </tr>}
+            }
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td style="text-align: center; background-color: #3366cc; color: white; font-weight: bold;font-size: 20px; padding: 10px;" colspan="9">
+                        Không tìm thấy đơn hàng nào của bạn
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+

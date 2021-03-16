@@ -1,0 +1,251 @@
+﻿@model Website_Panda.Models.QueryModel.CartSession
+@{
+    ViewBag.Title = "Check out";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    double total = 0;
+    double totalpay = 0;
+    var session = (Website_Panda.Models.Login.UserLogin)Session[Website_Panda.Models.Login.Common.USER_SESSION];
+    double discount = 0;
+    if (session != null) {
+        if (@ViewBag.Score != null) {
+            double score = @ViewBag.Score; }
+    }
+}
+    <body>
+        <!--banner-->
+        <div class="banner_inner">
+
+            <div class="services-breadcrumb">
+                <div class="inner_breadcrumb">
+
+                    <ul class="short">
+                        <li>
+                            <a href="~/Home/Index">Home</a>
+                            <i>|</i>
+                        </li>
+                        <li>Checkout</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br />
+        <!--checkout-->
+        @if (Model != null)
+        {
+            <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+                <div class="container">
+                    <div class="inner-sec-shop px-lg-4 px-3">
+                        <h3 class="tittle-w3layouts my-lg-4 mt-3">Checkout </h3>
+                        <div class="checkout-right">
+                            <h4>
+                                Your shopping cart contains:
+                                <span>@Html.Action("CheckOut_Total", "ShoppingCart")Product(s)</span>
+                            </h4>
+                            <table class="timetable_sub">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Image</th>
+                                        <th>Price</th>
+                                        <th>Promotion Price</th>
+                                        <th>Quantity</th>
+                                        <th>Sum</th>
+                                        <th>Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model.Items)
+                                    {
+
+                                        double sum = 0;
+
+                                        if (item._shopping_product.PromotionPrice <= 0 || item._shopping_product.PromotionPrice == null)
+                                        {
+                                            sum = Convert.ToDouble(item._shopping_product.Price * item._shopping_quantity);
+                                        }
+                                        else
+                                        {
+                                            sum = Convert.ToDouble(item._shopping_product.PromotionPrice * item._shopping_quantity);
+                                        }
+                                        <tr class="rem">
+                                            <td>
+                                                @Html.DisplayFor(model => item._shopping_product.ProductName)
+                                            </td>
+                                            <td>
+                                                <img src="~/Images/@item._shopping_product.Image" style="width: 80px ;height: 100px; object-fit: cover" alt="@item._shopping_product.Image" />
+                                            </td>
+                                            <td>@Html.DisplayFor(model => item._shopping_product.Price)</td>
+                                            <td>@Html.DisplayFor(model => item._shopping_product.PromotionPrice)</td>
+                                            <td>
+                                                @Html.DisplayFor(model => item._shopping_quantity)
+                                            </td>
+                                            <td>
+                                                @sum
+                                            </td>
+                                            <td>
+                                                <a href="/ShoppingCart/RemoveCart/@item._shopping_product.IDProduct" style="color:black; font-weight:600;">Remove</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>
+                            <a href="/ShoppingCart/ShowToCart" class="text-right">Back to basket</a>
+                        </p>
+                        <div class="checkout-left row">
+                            <div class="col-md-4 checkout-left-basket">
+
+                                @foreach (var item in Model.Items)
+                                {
+                                    double sum = 0;
+
+                                    if (item._shopping_product.PromotionPrice <= 0 || item._shopping_product.PromotionPrice == null)
+                                    {
+                                        sum = Convert.ToDouble(item._shopping_product.Price * item._shopping_quantity);
+                                        //total = Model.Total_Money();
+                                    }
+                                    else
+                                    {
+                                        sum = Convert.ToDouble(item._shopping_product.PromotionPrice * item._shopping_quantity);
+                                        //total = Model.Total_MoneyPromotion();
+                                    }                                    
+                                    total += sum;
+                                    totalpay = total + 10;
+                                    <ul>
+                                        <li>
+                                            @Html.DisplayFor(model => item._shopping_product.ProductName)
+                                            <span>@sum$</span>
+                                        </li>
+                                    </ul>
+                                    <br />
+                                }
+                                <hr />
+                                <ul>
+                                    <li style="font-weight:900; font-size:larger">
+                                        Total
+                                        <span>@total$</span>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li style="font-weight:900; font-size:larger">
+                                        Shipping Fee
+                                        <span>10$</span>
+                                    </li>
+                                </ul>
+                                @if (session != null)
+                                {
+                                    if (@ViewBag.Score != null)
+                                    {
+                                        if (@ViewBag.Score <= 50)
+                                        {
+                                            discount = total * 0;
+                                        }
+                                        else if (@ViewBag.Score > 50 && @ViewBag.Score < 100)
+                                        {
+                                            discount = total * 0.05; //giam 5%
+                                        }
+                                        else
+                                        {
+                                            discount = total * 0.1; //giam 10%
+                                        }
+                                    }
+                                    totalpay -= discount;
+                                    <ul>
+                                        <li style="font-weight:900; font-size:larger">
+                                            Discount
+                                            <span>-@discount$</span>
+                                        </li>
+                                    </ul>
+                                }
+                               
+                                <hr />
+
+                                <ul>
+                                    <li style="font-weight:900; font-size:larger; color:orange">
+                                        Total payable
+                                        <span>@totalpay$</span>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            
+                             
+                                <div class="col-md-2 address_form"></div>
+                                <div class="col-md-6 address_form">
+                                    <h2 class="contact__title">Customer Information</h2>
+                                    @if (session != null)
+                                    {
+                                        <div class="single-contact-form message">
+                                            @{Html.RenderAction("PurchaseAccount", "ShoppingCart");}
+                                        </div>
+                                        using (Html.BeginForm("PurchaseSuccess", "ShoppingCart"))
+                                        {
+
+                                            <form id="contact-form" method="post">
+
+                                                <div class="single-contact-form message">
+                                                    <h2 class="contact__title">Payment method</h2>
+                                                    <div>
+                                                        @Html.DropDownList("IDMethod", null, htmlAttributes: new { @class = "form-control", style = "height:38px" })
+                                                    </div>
+                                                </div>
+                                                <div class="checkout-right-basket" style="margin-top:20px">
+                                                    <input type="submit" value="Submit" class=" btn btn-primary" />
+                                                </div>
+                                            </form>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        using (Html.BeginForm("PurchaseSuccess", "ShoppingCart"))
+                                        {
+
+                                            <form id="contact-form" method="post">
+                                                <div class="single-contact-form space-between">
+                                                    <label class="control-label col-md-2">FirstName </label>
+                                                    <input class="form-control" name="FirstName" />
+                                                </div>
+                                                <div class="single-contact-form space-between">
+                                                    <label class="control-label col-md-2">LastName </label>
+                                                    <input class="form-control" name="LastName" />
+                                                </div>
+                                                <div class="single-contact-form space-between">
+                                                    <label class="control-label col-md-2">Email </label>
+                                                    <input class="form-control" name="Email" />
+                                                </div>
+                                                <div class="single-contact-form space-between">
+                                                    <label class="control-label col-md-2">Phone </label>
+                                                    <input class="form-control" name="Phone" />
+                                                </div>
+                                                <div class="single-contact-form space-between">
+                                                    <label class="control-label col-md-2">Address </label>
+                                                    <input class="form-control" name="Address" />
+                                                </div>
+                                                <div>
+                                                    <h2 class="contact__title">Payment method</h2>
+
+                                                    <div>
+                                                        @Html.DropDownList("IDMethod", null, htmlAttributes: new { @class = "form-control", style = "height:38px" })
+                                                    </div>
+                                                </div>
+                                                <div class="checkout-right-basket" style="margin-top:20px">
+                                                    <input type="submit" value="Submit" class=" btn btn-primary" />
+                                                </div>
+                                            </form>
+                                        }
+                                    }
+
+
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                </div>
+            </section>
+            <!--//checkout-->
+        }
+
+    </body>

@@ -1,0 +1,106 @@
+﻿@model Website_Panda.Models.Customer
+
+@{
+    ViewBag.Title = "DetailCus";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>DetailCus</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfirmPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfirmPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email_Cus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email_Cus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address_Cus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address_Cus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone_Cus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone_Cus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerRank)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerRank)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

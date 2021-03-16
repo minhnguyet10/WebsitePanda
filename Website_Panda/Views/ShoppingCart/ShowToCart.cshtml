@@ -1,0 +1,143 @@
+﻿@model Website_Panda.Models.QueryModel.CartSession
+
+@{
+    ViewBag.Title = "ShowToCart";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    double total = 0;
+}
+
+<head>
+    <style>
+        input {
+            border-radius: 3px;
+            margin-top: 2px;
+        }
+
+        button {
+            margin-top: 2px;
+        }
+
+        .btnUpdate {
+            background-color: white;
+            color: orangered;
+            border-color: orangered;
+            border-radius: 3px
+        }
+    </style>
+</head>
+<div class="banner_inner">
+
+    <div class="services-breadcrumb">
+        <div class="inner_breadcrumb">
+
+            <ul class="short">
+                <li>
+                    <a href="~/Home/Index">Home</a>
+                    <i>|</i>
+                </li>
+                <li>Cart</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br />
+<h2 style="text-align:center">Cart</h2>
+@if (Model != null)
+{<div class="cart-main-area section-padding--lg bg--white">
+        <div class="container-fluid">
+            <div class="table-content wnro__table table-responsive" style="padding: 35px 20px 5px 20px;">
+                <table id="table-cate" class="table table-striped table-bordered table-hover">
+                    <thead style="background-color: #ffdecc;">
+                        <tr>
+                            <th style="font-weight:bold;">Product Name</th>
+                            <th style="font-weight:bold;">Image</th>
+                            <th style="font-weight:bold;">Price</th>
+                            <th style="font-weight:bold;">Promotion Price</th>
+                            <th style="font-weight:bold;">Quantity</th>
+                            <th style="font-weight:bold;">Sum</th>
+                            <th style="font-weight:bold;">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.Items)
+                        {
+                            double sum = 0;
+
+                            if (item._shopping_product.PromotionPrice <= 0 || item._shopping_product.PromotionPrice == null)
+                            {
+                                sum = Convert.ToDouble(item._shopping_product.Price * item._shopping_quantity);
+                            }
+                            else
+                            {
+                                sum = Convert.ToDouble(item._shopping_product.PromotionPrice * item._shopping_quantity);
+                            }
+                            total += sum;
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => item._shopping_product.ProductName)
+                                </td>
+                                <td>
+                                    <img src="~/Images/@item._shopping_product.Image" style="width: 80px ;height: 100px; object-fit: cover" alt=@item._shopping_product.Image />
+                                </td>
+                                <td>@Html.DisplayFor(model => item._shopping_product.Price)</td>
+                                <td>@Html.DisplayFor(model => item._shopping_product.PromotionPrice)</td>
+                                <td>
+                                    @using (Html.BeginForm("Update_Quantity_Cart", "ShoppingCart"))
+                                    {
+                                        <input type="hidden" value="@item._shopping_product.IDProduct" name="ID_Product" />
+                                        <input style="width:5em; text-align: center;" type="number" value="@item._shopping_quantity" name="Quantity" />
+                                        <button type="submit" value="Update_Quantity" class="btnUpdate">
+                                            Update
+                                            quality
+                                        </button>
+                                        <h5 class="text-center" style="color:red">@Html.Raw(ViewBag.Error)</h5>
+                                    }
+                                    
+                                   
+                                    @*<h5 class="text-center" style="color:red">@ViewBag.Error</h5>*@
+                                </td>
+                                <td>
+                                    @sum
+                                </td>
+                                <td>
+                                    <a href="/ShoppingCart/RemoveCart/@item._shopping_product.IDProduct" style="color:black; font-weight:600;">Remove</a>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td> </td>
+                            <td> </td>
+                            <td>
+                            </td>
+                            <td>
+                                <span style="font-weight:900;font-size:18px;color:orangered">Total: $@total</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+
+            <div class="cartbox__btn" style="margin: 35px 20px 20px 20px;">
+                <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+                    <li style="list-style:none"><a href="/Home/Index" style="color:orangered;font-weight:900">Back to List</a></li>
+                    <li style="list-style:none">
+                        <div class="checkout-right-basket">
+
+                            <a href="/ShoppingCart/CheckOut">Check Out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+<br />
+<h5 class="text-center">@Html.Raw(ViewBag.Empty)</h5>
+

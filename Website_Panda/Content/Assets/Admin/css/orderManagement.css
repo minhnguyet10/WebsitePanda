@@ -1,0 +1,29 @@
+﻿body {
+}
+.divTable {
+    width: 100%;
+    border: 1px solid #999999;
+    text-align: left;
+}
+
+.divTable td {
+}
+
+.gridHead {
+    background-color: lightslategray;
+}
+
+    .gridHead > th > a {
+        color: #fff;
+    }
+
+    .gridHead > th {
+        color: #fff;
+        text-align: center;
+    }
+
+.gridFooter {
+    font-weight: bold;
+    color: red;
+}
+

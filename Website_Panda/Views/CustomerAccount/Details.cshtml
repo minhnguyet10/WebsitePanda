@@ -1,0 +1,65 @@
+﻿@model Website_Panda.Models.Customer
+
+@{
+    ViewBag.Title = "Details Customer";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+
+
+<div>
+    <div class="banner_inner">
+
+        <div class="services-breadcrumb">
+            <div class="inner_breadcrumb">
+
+                <ul class="short">
+                    <li>
+                        <a href="~/Home/Index">Home</a>
+                        <i>|</i>
+                    </li>
+                    <li>My account</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-2"></div>
+       
+        <div class="col-lg-8">
+            <h2 style="text-align:center; padding-top: 1em;">Information Customer</h2>
+            <hr />
+            <div class="row">
+                @*<div class="col-lg-5">
+            <span style="font-weight:600">Username: </span>@Html.DisplayFor(model => model.UserName)<br />
+            <span style="font-weight:600">Password: </span>@Html.DisplayFor(model => model.Password)
+        </div>*@
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <span style="font-weight:600">FirstName: </span>@Html.DisplayFor(model => model.FirstName)<br />
+                    <span style="font-weight:600">LastName: </span>@Html.DisplayFor(model => model.LastName)<br />
+                    <span style="font-weight:600">Email: </span>@Html.DisplayFor(model => model.Email_Cus)<br />
+                    <span style="font-weight:600">Address: </span>@Html.DisplayFor(model => model.Address_Cus)<br />
+                    <span style="font-weight:600">Phone: </span>@Html.DisplayFor(model => model.Phone_Cus)<br />
+                    <span style="font-weight:600">Create day: </span>@Html.DisplayFor(model => model.CreatedDay)<br />
+                    <span style="font-weight:600">Score: </span>@Html.DisplayFor(model => model.Score)<br />
+                    <span style="font-weight:600">Rank: </span>@Html.DisplayFor(model => model.CustomerRank)<br /><br />
+                    <div style="    float: right; margin-right:20px">
+                        @Html.ActionLink("Change Password", "ChangePassword", new { id = Model.IdCus }, new { @class = "btn btn-danger" })
+                    </div>
+                    <div style="    float: right; margin-right:10px">
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.IdCus }, new { @class = "btn btn-danger" })
+
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+
+           
+        </div>
+        
+        <div class="col-lg-2"></div>
+    </div>
+</div>
+

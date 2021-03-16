@@ -1,0 +1,66 @@
+﻿@model IPagedList<Website_Panda.Models.Blog>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "BlogList";
+    ViewBag.Keywords = "All Blog";
+    ViewBag.Descriptions = "All blog at Panda";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<div class="banner_inner">
+
+    <div class="services-breadcrumb">
+        <div class="inner_breadcrumb">
+
+            <ul class="short">
+                <li>
+                    <a href="~/Home/Index">Home</a>
+                    <i>|</i>
+                </li>
+                <li>Blog List</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="ht__bradcaump__area bg-image--6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <h2 class="tittle-w3layouts text-center my-lg-4 my-4">Blog</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+            <div class="col-8">
+                <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+                    @foreach (Website_Panda.Models.Blog item in Model)
+                    {
+                        <div class="row">
+                            <img src="~/Images/@item.Image" class="img-fluid" alt=@item.Image>
+                        </div>
+                        <div class="row" style="text-align:center;">
+                            <h2 style="color:#d28623">@Html.DisplayFor(model => item.Title)</h2>
+                            <a>@Html.DisplayFor(model => item.Subtitle)</a>
+                        </div>
+                        <div class="cartbox__btn" style="margin: 1em 17em 1em 10em;">
+                            <div class="checkout-right-basket">
+                                <a href="/Home/BlogDetail/@item.IDBlog">Continue Reading</a>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                    }
+                </div>
+            </div>
+        <div class="col-2"></div>
+    </div>
+    <ul class="wn__pagination">
+        @Html.PagedListPager(Model, sotrang => Url.Action("BlogList", "Home", new { page = sotrang }))
+    </ul>
+</div>

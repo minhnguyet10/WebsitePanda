@@ -1,0 +1,122 @@
+﻿@model Website_Panda.Models.Contact
+
+<!--footer -->
+<footer class="py-lg-5 py-3">
+    <div class="container-fluid px-lg-5 px-3">
+        <div class="row footer-top-w3layouts">
+            <div class="col-lg-3 footer-grid-w3ls">
+                <div class="footer-title">
+                    <h3>About Us</h3>
+                </div>
+                <div class="footer-text">
+                    <p>
+                        @Html.DisplayFor(model => model.Description)
+                    </p>
+                    <ul class="footer-social text-left mt-lg-4 mt-3">
+
+                        <li class="mx-2">
+                            <a href="#">
+                                <span class="fa fa-facebook-f"></span>
+                            </a>
+                        </li>
+                        <li class="mx-2">
+                            <a href="#">
+                                <span class="fa fa-twitter"></span>
+                            </a>
+                        </li>
+                        <li class="mx-2">
+                            <a href="#">
+                                <span class="fa fa-google-plus-g"></span>
+                            </a>
+                        </li>
+                        <li class="mx-2">
+                            <a href="#">
+                                <span class="fa fa-linkedin-in"></span>
+                            </a>
+                        </li>
+                        <li class="mx-2">
+                            <a href="#">
+                                <span class="fa fa-rss"></span>
+                            </a>
+                        </li>
+                        <li class="mx-2">
+                            <a href="#">
+                                <span class="fa fa-vk"></span>
+                            </a>
+                        </li>
+                        <li class="mx-2" style="opacity: 10%;">
+                            <a href="/LoginAdmin/Index">
+                                <span class="fa fa-sign-in"></span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 footer-grid-w3ls">
+                <div class="footer-title">
+                    <h3>Get in touch</h3>
+                </div>
+                <div class="contact-info">
+                    <h4>Location:</h4>
+                    <p>@Html.DisplayFor(model => model.ShopAddress)</p>
+                    <div class="phone">
+                        <h4>Contact:</h4>
+                        <p>
+                            Phone: @Html.DisplayFor(model => model.ShopPhone)
+                        </p>
+                        <p>
+                            Email:
+                            <a href="mailto:@Html.DisplayFor(model => model.ShopEmail)">@Html.DisplayFor(model => model.ShopEmail)</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 footer-grid-w3ls">
+                <div class="footer-title">
+                    <h3>Quick Links</h3>
+                </div>
+                <ul class="links">
+                    <li>
+                        <a href="/Home/Index">Home</a>
+                    </li>
+                    <li>
+                        <a href="/Home/About">About</a>
+                    </li>
+                    <li>
+                        <a href="/Home/AllProduct">Shop</a>
+                    </li>
+                    <li>
+                        <a href="/Home/PandaContact">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 footer-grid-w3ls">
+                <div class="footer-title">
+                    <h3>Sign up for your offers</h3>
+                </div>
+                <div class="footer-text">
+                    <p>By subscribing to our mailing list you will always get latest news and updates from us.</p>
+                    @using (Html.BeginForm("SendEmail", "Contact"))
+                    {
+                    <form action="#" method="post">
+                        <input class="form-control" type="email" name="Email" placeholder="Enter your email..." required="">
+                        <button type="submit" class="btn1">                            
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </button>
+                        <div class="clearfix"> </div>
+                    </form>}
+                </div>
+            </div>
+        </div>
+        <div class="copyright-w3layouts mt-4">
+            <p class="copy-right text-center ">
+                &copy; <script>
+                                    document.write(new Date().getFullYear())
+                </script> Panda Optical. All Rights Reserved | Design by
+                <a href="/Home/Index"> Panda </a>
+            </p>
+        </div>
+    </div>
+</footer>
+<!-- //footer -->

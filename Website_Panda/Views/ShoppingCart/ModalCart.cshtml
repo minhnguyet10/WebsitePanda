@@ -1,0 +1,80 @@
+﻿@model Website_Panda.Models.QueryModel.CartSession
+
+@{
+    Layout = null;
+    double total = 0;
+}
+
+<!DOCTYPE html>
+
+    <!-- Modal -->
+    
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="font-weight:600">Cart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @if (Model != null)
+            {
+        <div class="modal-body">
+            <div class="text-left">
+                <span style="margin-left: 10px; font-weight: 600;">@Model.Total_Quantity() product(s)</span>
+            </div>
+            <div class="row" style="margin-right:0">
+                @foreach (var item in Model.Items)
+                {
+                    double sum = 0;
+
+                    if (item._shopping_product.PromotionPrice <= 0 || item._shopping_product.PromotionPrice == null)
+                    {
+                        sum = Convert.ToDouble(item._shopping_product.Price * item._shopping_quantity);
+
+                    }
+                    else
+                    {
+                        sum = Convert.ToDouble(item._shopping_product.PromotionPrice * item._shopping_quantity);
+
+                    }
+                    total += sum;
+
+                    <div class="col-lg-5">
+                        <a href="product-details.html"><img src="~/Images/@item._shopping_product.Image" alt=@item._shopping_product.Image></a>
+                        <h5 style="text-align:center">@Html.DisplayFor(model => item._shopping_product.ProductName)</h5>
+                    </div>
+                    <div class="col-lg-6" style="margin-top: 50px;">
+                        <div class="d-flex justify-content-between">
+                            <span>Quantity: @Html.DisplayFor(model => item._shopping_quantity) </span>
+                        </div>
+                        <div class="d-flex justify-content-between">                            
+                            <span style="color:red; font-size: larger">Sum: @sum</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 text-left" style="margin-top: 65px;">
+                        <a href="/ShoppingCart/RemoveCart/@item._shopping_product.IDProduct" style="color:black; font-weight:600;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </div>
+
+                }
+            </div>
+            <div class="text-right">
+                <span style="color:red; font-size: x-large; font-weight: 600; margin-right:10px" >Total: @total</span>
+                
+            </div>
+        </div>
+            }
+            else
+            {
+                <div class="modal-body">
+                    <div class="text-center">
+                        <p>Empty cart</p>
+                    </div>
+                    </div>}
+                    <div class="modal-footer">
+                        <button type="button"  class="Addtowishlist" data-dismiss="modal">Close</button>
+                        <a type="button" class="Addtocart" href="/ShoppingCart/ShowToCart">Show to Cart</a>
+                    </div>
+                </div>
+            </div>
+

@@ -1,0 +1,143 @@
+﻿@using Website_Panda.Models;
+@model _Order
+@{
+    ViewBag.Title = "OrderApproval";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    double total = 0;
+    double totalpay = 0;
+    double discount = 0;
+    if (Model.IdCus != null)
+    {
+        if(Model.Customer.Score != null) {
+            double score = (double) Model.Customer.Score;
+        }
+    }
+}
+
+<h2>Thông tin đơn hàng </h2>
+<br />
+
+@using (Html.BeginForm("OrderApproval", "OrderManagement", FormMethod.Post))
+{
+    <div class="ChiTietDonHang table">
+        @{IEnumerable<OrderDetail> orderDetails = (IEnumerable<OrderDetail>)ViewBag.orderDetailsList;}
+        <table class="table" id="table">
+            <tr>
+                <td colspan="5">
+                    <table style="width:100%;">
+                        <tr>
+                            <td>Mã đơn hàng: <b style="color:red;"> @Model.IDOrder @Html.Hidden("IDOrder", @Model.IDOrder)</b></td>
+
+                            <td>Ngày đặt: @Model.OrderDate.Value.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                @if (@Model.Status == true)
+                                {<span style="color:orangered">Đã duyệt</span>}
+                                else
+                                {
+                                    <span>Chưa duyệt</span>
+                                }
+                            </td>
+                            <td>
+                                @if (@Model.Paid == true)
+                                {<span style="color:orangered"> Đã thanh toán</span>}
+                                else
+                                {
+                                    <span>Chưa thanh toán</span>
+                                }
+                            </td>
+                            <td>
+                                @if (@Model.Delivered == true)
+                                {<span style="color:orangered">Đã giao</span>}
+                                else
+                                {
+                                    <span>Chưa giao</span>
+                                }
+                            </td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <table style="width:100%;">
+                        <tr>
+                            <td>Tên KH: <b style="color:red;"> @Model.FirstName</b> <b style="color:red;">@Model.LastName</b></td>
+                            <td>SĐT: <b style="color:red;"> @Model.Phone_Cus</b></td>
+                            <td>Email: <b style="color:red;"> @Model.Email_Cus</b></td>
+                            <td>Địa chỉ:  <b style="color:red;"> @Model.Address_cus</b></td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center" colspan="5">Tổng số lượng: @Model.OrderDetails.Sum(n => n.QuantitySale) sản phẩm</td>
+            </tr>
+            <tr>
+                <td><b>Sản phẩm</b></td>
+                <td><b>Hình ảnh</b></td>
+                <td><b>Số lượng đặt</b></td>
+                <td><b>Đơn giá đặt</b></td>
+                <td><b>Tổng tiền</b></td>
+            </tr>
+
+            @foreach (var item in orderDetails)
+            {
+                <tr>
+                    <td>@item.Product.ProductName</td>
+                    <td><img width="150" height="150" src="~/Images/@item.Product.Image" /></td>
+                    <td>@item.QuantitySale</td>
+                    <td>@item.Price $</td>
+                    <td colspan="4">@item.OrderTotalPrice.Value.ToString("#,##") $</td>
+                </tr>
+                total += Convert.ToDouble(item.OrderTotalPrice);
+                totalpay = total + 10;
+            }
+            <tr>
+                <td align="right" colspan="5" style="text-align: right; color:black">Tổng: @total$</td>
+            </tr>
+            <tr>
+                <td align="right" colspan="5" style="text-align: right;color:black">Shipping fee: 10$</td>
+            </tr>
+            @if (Model.IdCus != null)
+            {
+                if (Model.Customer.Score != null)
+                {
+                    if (Model.Customer.Score <= 50)
+                    {
+                        discount = total * 0;
+                    }
+                    else if (Model.Customer.Score > 50 && Model.Customer.Score < 100)
+                    {
+                        discount = total * 0.05; //giam 5%
+                    }
+                    else
+                    {
+                        discount = total * 0.1; //giam 10%
+                    }
+                }
+                totalpay -= discount;
+                <tr>
+                    <td align="right" colspan="5" style="text-align: right;color:black">
+                        Discount:
+                        <span> -@discount$</span>
+
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td align="right" colspan="5" style="font-weight:600; text-align: right; color:black">Tổng tiền phải trả: @totalpay$</td>
+            </tr>
+        </table>
+        <br /><br />
+        <input type="submit" value="Duyệt đơn hàng" id="btnInDonHang" class="btn btn-success" />
+        <a class="btn btn-primary " href="@Url.Action("WaitingApproval", "OrderManagement")">Back List</a>
+    </div>
+}
+@if (ViewBag.Message != null)
+{
+    <h1 class="label label-success">@ViewBag.Message</h1>
+    <br />
+    <br />
+}

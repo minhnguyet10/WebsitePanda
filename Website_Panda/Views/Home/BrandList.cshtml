@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Website_Panda.Models.Brand>
+@{
+    Layout = null;
+    foreach (var item in Model)
+    {
+        ViewBag.Title = @Html.DisplayFor(modelItem => item.BrandName);
+        ViewBag.Keywords = @Html.DisplayFor(modelItem => item.BrandID);
+        ViewBag.Descriptions = @Html.DisplayFor(modelItem => item.Note);
+    }
+}
+<div class="media-mini mt-3"><a href="/Home/AllProduct" style="color:black;    margin-left: 1rem; font-weight:600">All Product</a></div>
+@foreach (var item in Model)
+{
+
+    <div class="media-mini mt-3"><a href="/Home/ProductBrandList/@item.BrandID" style="color:black;    margin-left: 1rem;"> @Html.DisplayFor(modelItem => item.BrandName)</a></div>
+
+}

@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Website_Panda.Models.Product>
+
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{<div class="item">
+        <div class="gd-box-info text-center">
+            <div class="product-men women_two bot-gd">
+                <div class="product-googles-info slide-img googles">
+                    <div class="men-pro-item">
+                        <div class="men-thumb-item">
+                            <img src="~/Images/@item.Image" class="img-fluid" alt=@item.Image>
+                            <div class="men-cart-pro">
+                                <div class="inner-men-cart-pro">
+                                    <a href="/Home/ProductDetail/@item.IDProduct" class="link-product-add-cart">Quick View</a>
+                                </div>
+                            </div>
+                            @if (item.Quantity <= 0)
+                            {
+                                <span class="product-new-top">Sold Out</span>
+                            }
+                            else
+                            {
+                                <span class="product-new-top">Promotion</span>
+                            }
+
+                        </div>
+                        <div class="item-info-product">
+
+                            <div class="info-product-price">
+                                <div class="grid_meta">
+                                    <div class="product_price">
+                                        <h4>
+                                            <a href="single.html">@Html.DisplayFor(modelItem => item.ProductName) </a>
+                                        </h4>
+                                        @if (item.PromotionPrice <= 0 || item.PromotionPrice == null)
+                                        {
+                                            <div class="grid-price mt-2">
+                                                <span class="money ">@Html.DisplayFor(modelItem => item.Price)$</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="grid-price mt-2">
+                                                <div class="row">
+                                                    <div class="col-lg-5 col-sm-6">
+                                                        <span class="money ">@Html.DisplayFor(modelItem => item.PromotionPrice)$</span>
+                                                    </div>
+                                                    <div class="col-lg-4 col-sm-6">
+                                                        <span class="item_price" style="text-decoration: line-through; opacity: 40%">@Html.DisplayFor(modelItem => item.Price)$</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                @if (item.Quantity <= 0 || item.Quantity == null)
+                                {
+                                    <div class="googles single-item hvr-outline-out">
+                                        <div class="row" style="padding-top:0.5em;">
+                                            <a>Out of stock!</a>
+                                        </div>
+                                    </div> 
+                                }
+                                else
+                                {
+                                    <div class="googles single-item hvr-outline-out" data-price="@item.Price">
+                                        <div class="row" style="padding-top:2em;">
+                                            <div class="col-lg-6 col-sm-12">
+                                                <a href="/ShoppingCart/AddtoCart/@item.IDProduct">
+                                                    <img src="@Url.Content("~/Content/Assets/Img/cart.png")" style="height:20px; width:20px; margin-left: -10px;" alt=@item.Image />
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12">
+                                                <a href="/WishList/AddToWishList/@item.IDProduct">
+                                                    <img src="@Url.Content("~/Content/Assets/Img/heart.png")" style="height:20px; width:20px" alt=@item.Image />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+
+

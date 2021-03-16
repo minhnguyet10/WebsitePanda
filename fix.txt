@@ -1,0 +1,97 @@
+BANNER 
+xóa, tạo lại.
+thêm Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" })
+
+PRODUCT DETAIL
+line 16: <li data-thumb="../../Images/@Model.Image">
+
+filter product
+AllProduct
+-LayoutPage: 
+	//filter
+    <script>
+        function showProducts(minPrice, maxPrice) {
+            $("#products div").hide().filter(function() {
+                var price = parseInt($(this).data("price"), 10);
+                return price >= minPrice && price <= maxPrice;
+            }).show();
+        }
+    </script>
+      
+    <script>
+        $(function() {
+        var options = {
+            range: true,
+            min: 0,
+            max: 2000,
+            values: [50, 300],
+            slide: function(event, ui) {
+                var min = ui.values[0],
+                    max = ui.values[1];
+
+                $("#amount").val("$" + min + " - $" + max);
+                showProducts(min, max);
+            }
+        }, min, max;
+
+        $("#slider-range").slider(options);
+
+        min = $("#slider-range").slider("values", 0);
+        max = $("#slider-range").slider("values", 1);
+
+        $("#amount").val("$" + min + " - $" + max);
+
+        showProducts(min, max);
+    });
+    </script>
+
+-AllProduct: 	 
+	<div class="row" id="products">
+                    @foreach (Website_Panda.Models.Product item in Model)
+                    {
+                        <div class="col-md-4 product-men women_two shop-gd" data-price="@item.Price" >
+                            <div class="product-googles-info googles" data-price="@item.Price">
+                                <div class="men-pro-item" id="products" data-price="@item.Price" >
+                                    <div class="men-thumb-item" data-price="@item.Price">
+                                        <img src="~/Images/@item.Image" class="img-fluid" alt="">
+                                        <div class="men-cart-pro">
+                                            <div class="inner-men-cart-pro" data-price="@item.Price">
+                                                <a href="/Home/ProductDetail/@item.IDProduct" class="link-product-add-cart">Quick View</a>
+                                            </div>
+                                        </div>
+                                        @*<span class="product-new-top">New</span>*@
+                                    </div>
+                                    <div class="item-info-product" data-price="@item.Price">
+
+                                        <div class="info-product-price" data-price="@item.Price">
+                                            <div class="grid_meta" data-price="@item.Price">
+                                                <div class="product_price" data-price="@item.Price">
+                                                    <h4>
+                                                        <a href="single.html">@Html.DisplayFor(modelItem => item.ProductName) </a>
+                                                    </h4>
+                                                    <div class="grid-price mt-2" data-price="@item.Price">
+                                                        <span class="money ">@Html.DisplayFor(modelItem => item.Price)$</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="googles single-item hvr-outline-out" data-price="@item.Price">
+                                                <form action="#" method="post">
+                                                    <input type="hidden" name="cmd" value="_cart">
+                                                    <input type="hidden" name="add" value="1">
+                                                    <input type="hidden" name="googles_item" value="Farenheit Oval">
+                                                    <input type="hidden" name="amount" value="325.00">
+                                                    <button type="submit" class="googles-cart pgoogles-cart">
+                                                        <i class="fa fa-cart-plus"></i>
+                                                    </button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix" data-price="@item.Price"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>

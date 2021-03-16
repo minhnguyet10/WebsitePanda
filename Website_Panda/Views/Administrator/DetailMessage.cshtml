@@ -1,0 +1,57 @@
+﻿@model Website_Panda.Models.Message
+
+@{
+    ViewBag.Title = "Detail Message";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Detail Message</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MessageContact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MessageContact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Createday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Createday)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "IndexMessage")
+</p>

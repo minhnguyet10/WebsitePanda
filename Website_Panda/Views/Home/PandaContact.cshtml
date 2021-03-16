@@ -1,0 +1,84 @@
+﻿@model Website_Panda.Models.Contact
+@{
+    ViewBag.Title = "Contact Us";
+    ViewBag.Keywords = "Contact here";
+    ViewBag.Descriptions = "Let's get in touch";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<div class="banner_inner">
+
+    <div class="services-breadcrumb">
+        <div class="inner_breadcrumb">
+
+            <ul class="short">
+                <li>
+                    <a href="~/Home/Index">Home</a>
+                    <i>|</i>
+                </li>
+                <li>Contact</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<body>
+    <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+        <div class="container">
+            <h3 class="tittle-w3layouts text-center my-lg-4 my-4">Contact</h3>
+            <div class="inner_sec">
+                <p class="sub text-center mb-lg-5 mb-3">We love to discuss your idea</p>
+                <div class="address row" style="margin-right:0">
+
+                    <div class="col-lg-4 address-grid">
+                        <div class="row address-info" style="height:100%">
+                            <div class="col-md-3 address-left text-center">
+                                <i class="fa fa-map"></i>
+                            </div>
+                            <div class="col-md-9 address-right text-left">
+                                <h6>Address</h6>
+                                <p>
+                                    @Html.DisplayFor(model => model.ShopAddress)
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 address-grid">
+                        <div class="row address-info" style="height:100%">
+                            <div class="col-md-3 address-left text-center">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <div class="col-md-9 address-right text-left">
+                                <h6>Email</h6>
+                                <p>
+                                    <a href="mailto:@Html.DisplayFor(model => model.ShopEmail)">@Html.DisplayFor(model => model.ShopEmail)</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 address-grid">
+                        <div class="row address-info" style="height:100%">
+                            <div class="col-md-3 address-left text-center">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="col-md-9 address-right text-left">
+                                <h6>Phone</h6>
+                                <p>@Html.DisplayFor(model => model.ShopPhone)</p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                @{Html.RenderAction("Message", "Home");}
+
+            </div>
+        </div>
+    </section>
+    <div class="contact-map">
+        <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=huflit&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+    </div>
+</body>
+
+
+

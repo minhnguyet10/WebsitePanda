@@ -1,0 +1,62 @@
+﻿@model Website_Panda.Models.Customer
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+    <div class="banner_inner">
+
+        <div class="services-breadcrumb">
+            <div class="inner_breadcrumb">
+
+                <ul class="short">
+                    <li>
+                        <a href="~/Home/Index">Home</a>
+                        <i>|</i>
+                    </li>
+                    <li>Login</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <div class="checkout_login">
+            @using (Html.BeginForm("LoginCus", "CustomerAccount", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+            <form class="wn__checkout__form" action="#">
+                <br />
+                <h2 class="text-center" style="font-weight:600">Login</h2>
+                <hr />
+                <div class="login p-5 bg-dark mx-auto mw-100">
+                    <div class="form-group">
+                        <label>
+                            <span class="control-label col-md-2">Username</span>
+                        </label>
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", id = "exampleInputEmail1" } })
+                        <p style="color:red">@Html.ValidationMessageFor(m => m.UserName)</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label><span class="control-label col-md-2">Password</span></label>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        <p style="color:red">@Html.ValidationMessageFor(m => m.Password)</p>
+                    </div>
+
+                    <p style="color:red">@Html.Raw(ViewBag.LoginError)</p>
+                    <br />
+                    <div class="mb-2"><a href="/CustomerAccount/ForgotPassword"> Forgot password?</a></div>
+
+                    <button type="submit" class="btn btn-primary submit mb-4">Sign In</button>
+                    <a class="btn btn-dark submit mb-4" href="@Url.Action("CreateAccount","CustomerAccount")">Register</a>
+                </div>
+
+            </form>
+            }
+        </div>
+    </div>
+    <div class="col-lg-4"></div>
+</div>

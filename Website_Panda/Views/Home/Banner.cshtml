@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Website_Panda.Models.Banner>
+
+@{
+    Layout = null;
+
+}
+    <head>       
+        <link rel="stylesheet" href="~/Content/Assets/Home/css/carouselBanner.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">      
+        @{int i = 0;}
+        @foreach (var item in Model)
+        {
+            {
+                i++;
+                var active = i == 1 ? "active" : "";
+                <div class="item @active">
+                    <img src="~/Images/@item.Image" alt=@item.Image>
+                    @if(@item.Description != null) { 
+                    <div class="carousel-caption">
+                        <h4 style="color:white; background-color: #00000078; padding: 5px; border-radius: 20px;">@item.Description</h4>
+                    </div>}
+                </div>
+                
+
+            }
+        }
+      
+    </div>
+
+    <!-- Left and right controls -->
+  
+    <a class="carousel-control-prev test" href="#myCarousel" role="button" data-slide="prev">
+        <span class="fa fa-chevron-left" style="color:white"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next test" href="#myCarousel" role="button" data-slide="next">
+        <span class="fa fa-chevron-right" style="color:white" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+
+    </a>
+</div>

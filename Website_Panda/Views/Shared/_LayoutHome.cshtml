@@ -1,0 +1,354 @@
+﻿@{
+
+    var session = (Website_Panda.Models.Login.UserLogin)Session[Website_Panda.Models.Login.Common.USER_SESSION];
+}
+    <head runat="server">
+        <meta name="robots" content="noindex,nofollow" />
+        <title>@ViewBag.Title</title>
+        <meta name="keywords" content="@ViewBag.Keywords" />
+        <meta name="description" content="@ViewBag.Descriptions" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="~/Content/Assets/Img/iicon.ico">
+
+        <link href="~/Content/Assets/Home/css/bootstrap.css" rel='stylesheet' type='text/css' />
+        <link href="~/Content/Assets/Home/css/login_overlay.css" rel='stylesheet' type='text/css' />
+        <link href="~/Content/Assets/Home/css/style6.css" rel='stylesheet' type='text/css' />
+        <link href="~/Content/Assets/Home/css/contact.css" rel='stylesheet' type='text/css' />
+        <link href="~/Content/Assets/Home/css/checkout.css" rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="~/Content/Assets/Home/css/shop.css" type="text/css" />
+        <link rel="stylesheet" href="~/Content/Assets/Home/css/owl.carousel.css" type="text/css" media="all">
+        <link rel="stylesheet" href="~/Content/Assets/Home/css/owl.theme.css" type="text/css" media="all">
+        <link href="~/Content/Assets/Home/css/style.css" rel='stylesheet' type='text/css' />
+        <link href="~/Content/Assets/Home/css/fontawesome-all.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
+              rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="~/Content/Assets/Home/css/jquery-ui1.css">
+        <link href="~/Content/Assets/Home/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="~/Content/Assets/Home/css/flexslider.css" type="text/css" media="screen" />
+        <script src="~/Content/Assets/Admin/scripts/JavaScript_Img.js"></script>
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        @*icon*@
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+        @*<link href="~/Content/Assets/Home/css/animation.css" type="text/css" rel='stylesheet' />*@
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    </head>
+
+<body>
+    <div class="banner-top container-fluid" id="home">
+        <!-- header -->
+        <header>
+            <div class="row">
+                <div class="col-md-3 top-info text-left mt-lg-4">
+                    @if (session == null)
+                    {
+                        <ul style="margin-top: 1em; margin-bottom: 2em;">
+                            <li class="number-phone mt-3"><span>Have a nice day.</span></li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul style="margin-top: 1em; margin-bottom: 2em;">
+                            <li class="number-phone mt-3"><span>Hello, @session.UserName !</span></li>
+                        </ul>
+
+                    }
+                </div>
+                <div class="col-md-6 logo-w3layouts text-center">
+                    <h1 class="logo-w3layouts">
+                        <a class="navbar-brand" href="~/Home/Index">
+                            <img src="~/Content/Assets/Img/logo.png" style=" height: 150px;width: 200px; margin-top: -30px;"/>
+                        </a>
+                    </h1>
+                </div>
+
+                <div class="col-md-3 top-info-cart text-right mt-lg-4">
+                    <ul class="cart-inner-info" style="    margin-top: 2em;">
+                        @*love*@
+                        <li class="galssescart galssescart2 cart cart box_1">
+                            <a class="fa fa-heart" style="color:black" href="@Url.Action("ShowToWishList","WishList")"></a>
+                            @Html.Action("BagWishList", "WishList")
+                        </li>
+                        <li class="galssescart galssescart2 cart cart box_1">
+                            <a class="fa fa-cart-arrow-down" style="color:black" data-toggle="modal" data-target="#exampleModal"></a>
+                            @Html.Action("BagCart", "ShoppingCart")
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                @{ Html.RenderAction("ModalCart", "ShoppingCart");}
+                                </div>
+                        </li>
+                        @*user*@
+                        <li class="button-log">
+                            @if (session == null || session.UserName =="admin")
+                            {
+                                <a class="btn-open" href="/CustomerAccount/LoginCus">
+                                    <span class="fa fa-sign-in" aria-hidden="true"></span>
+                                </a>
+                            }
+                            else
+                            {
+                                <div class="dropdown">
+                                    <a class="btn-open">
+                                        <span class="fa fa-user" aria-hidden="true"></span>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="left: -120px;">
+                                        <a class="dropdown-item" href="/CustomerAccount/Details/@session.UserID">My Account</a>
+                                        <a class="dropdown-item" href="/CustomerAccount/OrderManagement/@session.UserID">My Order</a>
+                                        <a class="dropdown-item" href="/CustomerAccount/OrderHistory/@session.UserID">Order history</a>
+                                        <a class="dropdown-item" href="@Url.Action("Logout", "CustomerAccount")">Log out</a>
+                                    </div>
+                                </div>
+                            }
+                    </ul>
+                </div>
+            </div>
+
+            @* search *@
+            <!-- open/close -->
+
+            <label class="top-log mx-auto"></label>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light top-header mb-2">
+                <button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @{ Html.RenderAction("Menu", "Home");}
+            </nav>
+        </header>     
+        </div>
+    <div>
+        @RenderBody()
+    </div>
+    <br />
+    <br />
+    <br />
+    <div>
+        @{Html.RenderAction("Footer", "Contact");}
+    </div>
+
+
+
+    <!--jQuery-->
+    <script src="~/Content/Assets/Home/js/jquery-2.2.3.min.js"></script>
+
+    <!-- price range (top products) -->
+    <script src="~/Content/Assets/Home/js/jquery-ui.js"></script>
+
+    <script>
+        function showProducts(minPrice, maxPrice) {
+            $("#products div").hide().filter(function () {
+                var price = parseInt($(this).data("price"), 10);
+                return price >= minPrice && price <= maxPrice;
+            }).show();
+        }
+    </script>
+
+    <script>
+        $(function () {
+            var options = {
+                range: true,
+                min: 0,
+                max: 1000,
+                values: [50, 1000],
+                slide: function (event, ui) {
+                    var min = ui.values[0],
+                        max = ui.values[1];
+
+                    $("#amount").val("$" + min + " - $" + max);
+                    showProducts(min, max);
+                }
+            }, min, max;
+
+            $("#slider-range").slider(options);
+
+            min = $("#slider-range").slider("values", 0);
+            max = $("#slider-range").slider("values", 1);
+
+            $("#amount").val("$" + min + " - $" + max);
+
+            showProducts(min, max);
+        });
+    </script>
+
+    <!-- carousel -->
+    <!-- Count-down -->
+    <script src="~/Content/Assets/Home/js/simplyCountdown.js"></script>
+    <link href="~/Content/Assets/Home/css/simplyCountdown.css" rel='stylesheet' type='text/css' />
+    <script>
+        var d = new Date();
+        simplyCountdown('simply-countdown-custom', {
+            year: d.getFullYear(),
+            month: d.getMonth() + 3, /*2 tháng so với tháng hiện tại*/
+            day: 1 /*ngày 1*/
+        });
+    </script>
+    <!--// Count-down -->
+    <script src="~/Content/Assets/Home/js/owl.carousel.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    600: {
+                        items: 2,
+                        nav: false
+                    },
+                    900: {
+                        items: 3,
+                        nav: false
+                    },
+                    1000: {
+                        items: 4,
+                        nav: true,
+                        loop: false,
+                        margin: 20
+                    }
+                }
+            })
+        })
+    </script>
+
+    <!-- //end-smooth-scrolling -->
+    <!-- dropdown nav -->
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!-- //dropdown nav -->
+    <script src="~/Content/Assets/Home/js/move-top.js"></script>
+    <script src="~/Content/Assets/Home/js/easing.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 900);
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+        });
+    </script>
+    <!--// end-smoth-scrolling -->
+    <!--// ----------------------------- ----------------------------- -->
+    <!-- price range (top products) -->
+    <script src="~/Content/Assets/Home/js/jquery-ui.js"></script>
+    <script>
+        function showProducts(minPrice, maxPrice) {
+            $("#products div").hide().filter(function () {
+                var price = parseInt($(this).data("price"), 10);
+                return price >= minPrice && price <= maxPrice;
+            }).show();
+        }
+    </script>
+
+    <script>
+        $(function () {
+            var options = {
+                range: true,
+                min: 0,
+                max: 1000,
+                values: [0, 1000],
+                slide: function (event, ui) {
+                    var min = ui.values[0],
+                        max = ui.values[1];
+
+                    $("#amount").val("$" + min + " - $" + max);
+                    showProducts(min, max);
+                }
+            }, min, max;
+
+            $("#slider-range").slider(options);
+
+            min = $("#slider-range").slider("values", 0);
+            max = $("#slider-range").slider("values", 1);
+
+            $("#amount").val("$" + min + " - $" + max);
+
+            showProducts(min, max);
+        });
+    </script>
+
+    <!-- //price range (top products) -->
+    <!-- single -->
+    <script src="~/Content/Assets/Home/js/imagezoom.js"></script>
+    <!-- single -->
+    <!-- script for responsive tabs -->
+    <script src="~/Content/Assets/Home/js/easy-responsive-tabs.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true, // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+            $('#verticalTab').easyResponsiveTabs({
+                type: 'vertical',
+                width: 'auto',
+                fit: true
+            });
+        });
+    </script>
+    <!-- FlexSlider -->
+    <script src="~/Content/Assets/Home/js/jquery.flexslider.js"></script>
+    <script>
+        // Can also be used with $(document).ready()
+        $(window).load(function () {
+            $('.flexslider1').flexslider({
+                animation: "slide",
+                controlNav: "thumbnails"
+            });
+        });
+    </script>
+
+    @*paypal*@
+    <script src="https://www.paypal.com/sdk/js?client-id=AcCoSSsm94xPPGBkaQX1PkxVr8AVQFpdwcg8VWOeH9RBg5jRktFrM8u3LWMCXwc03xlWs1VMfSV5NxOD" data-namespace="paypal_sdk"></script>
+    <script>paypal_sdk.Buttons().render('#paypal-button-container');</script>
+
+    <script src="~/Content/Assets/Home/js/bootstrap.js"></script>
+    <!-- js file -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0" nonce="VZ1t4fIB"></script>
+
+    <!--  ---------------------------------------------------- -->
+    <script src="~/Content/Assets/Home/js/bootstrap.js"></script>
+    <!-- js file -->
+    <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
+</body>
+

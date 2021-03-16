@@ -1,0 +1,159 @@
+﻿@model IEnumerable<Website_Panda.Models.Product>
+@{
+    //ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+    <head>
+        <meta name="google-site-verification" content="RPc9KxF3rnYpB8ZcfTvzcBIBJ-AsMDSSLNNHrV8t2Js" />
+    </head>
+@{ Html.RenderAction("Banner", "Home");}
+<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+    <div class="container-fluid">
+        <div class="inner-sec-shop px-lg-4 px-3">
+            <h3 class="tittle-w3layouts my-lg-4 my-4">New Arrivals for you </h3>
+
+
+            @{Html.RenderAction("NewProduct", "Home");}
+
+
+            <div class="row">
+                <div class="col-md-12 middle-slider my-4">
+                    <div class="middle-text-info ">
+
+                        <h3 class="tittle-w3layouts two text-center my-lg-4 mt-3">Flash sale</h3>
+                        <div class="simply-countdown-custom" id="simply-countdown-custom"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <!--/slide-->
+                <div class="slider-img mid-sec mt-lg-5 mt-2 px-lg-5 px-3">
+                    <!--//banner-sec-->
+                    <h3 class="tittle-w3layouts text-left my-lg-4 my-3">Promotions</h3>
+                    <div class="mid-slider">
+                        <div class="owl-carousel owl-theme row">
+                            @{ Html.RenderAction("HotProduct", "Home");}
+                        </div>
+                    </div>
+                </div>
+                <!--//slider-->
+            </div>
+          
+            <div class="row galsses-grids pt-lg-5 pt-3">
+                <div class="col-lg-6 galsses-grid-left">
+                    <figure class="effect-lexi">
+                        <img src="~/Content/Assets/Img/12.jpg" alt="imgPandaOptical1" class="img-fluid">
+                        <figcaption>
+                            <h3>
+                                More
+                                <span>Brands</span>
+                            </h3>
+                            <a href="/Home/ProductBrandList/1">
+                                <p style="color: #ffffff;">Express your style now.</p>
+                            </a>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-lg-6 galsses-grid-left">
+                    <figure class="effect-lexi">
+                        <img src="~/Content/Assets/Img/13.jpg" alt="imgPandaOptical2" class="img-fluid">
+                        <figcaption>
+                            <h3>
+                                More
+                                <span>Features</span>
+                            </h3>
+                            <a href="/Home/ProductList/1">
+                            <p style="color: #ffffff;">Express your style now.</p>
+                            </a>
+                            
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <!-- /grids -->
+            <div class="bottom-sub-grid-content py-lg-5 py-3">
+                <div class="row">
+                    <div class="col-lg-4 bottom-sub-grid text-center">
+                        <div class="bt-icon">
+
+                            <span class="fa fa-hand-paper"></span>
+                        </div>
+
+                        <h4 class="sub-tittle-w3layouts my-lg-4 my-3">Satisfaction Guaranteed</h4>
+                        <p>You can trust our products, we guarantee for the best quality and a and we provide a product exchange policy* for each of our products.</p>
+                        
+                    </div>
+                    <!-- /.col-lg-4 -->
+                    <div class="col-lg-4 bottom-sub-grid text-center">
+                        <div class="bt-icon">
+                            <span class="fa fa-rocket"></span>
+                        </div>
+
+                        <h4 class="sub-tittle-w3layouts my-lg-4 my-3">Fast Shipping</h4>
+                        <p>Shipping options based on your decision, we provide a 2 days fast shipping for foreign coutries.</p>
+                        
+                    </div>
+                    <!-- /.col-lg-4 -->
+                    <div class="col-lg-4 bottom-sub-grid text-center">
+                        <div class="bt-icon">
+                            <span class="fa fa-sun"></span>
+                        </div>
+
+                        <h4 class="sub-tittle-w3layouts my-lg-4 my-3">UV Protection</h4>
+                        <p>With our latest technology of producing lens for glasses, it will protect your eyes from UV.</p>
+                       
+                    </div>
+                    <!-- /.col-lg-4 -->
+                </div>
+            </div>
+            <!-- //grids -->
+            <!-- /clients-sec -->
+            <div class="testimonials p-lg-5 p-3 mt-4">
+                <div class="row last-section">
+                    <div class="col-lg-3 footer-top-w3layouts-grid-sec">
+                        <div class="mail-grid-icon text-center">
+                            <i class="fa fa-gift"></i>
+                        </div>
+                        <div class="mail-grid-text-info">
+                            <h3>Genuine Product</h3>
+                            <p>Proud to be the official luxury distributor.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 footer-top-w3layouts-grid-sec">
+                        <div class="mail-grid-icon text-center">
+                            <i class="fa fa-shield"></i>
+                        </div>
+                        <div class="mail-grid-text-info">
+                            <h3>Reasonable Price</h3>
+                            <p>The fee you are charged for a product is as indicated on each item in the shops.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 footer-top-w3layouts-grid-sec">
+                        <div class="mail-grid-icon text-center">
+                            <i class="fa fa-dollar-sign"></i>
+                        </div>
+                        <div class="mail-grid-text-info">
+                            <h3>Cash on Delivery</h3>
+                            <p>We also accept Credit/Debit card on delivery or Cash on Delivery.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 footer-top-w3layouts-grid-sec">
+                        <div class="mail-grid-icon text-center">
+                            <i class="fa fa-truck"></i>
+                        </div>
+                        <div class="mail-grid-text-info">
+                            <h3>Easy Delivery</h3>
+                            <p>You will receive products in 3-5 days.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- //clients-sec -->
+        </div>
+    </div>
+</section>
+
+
+

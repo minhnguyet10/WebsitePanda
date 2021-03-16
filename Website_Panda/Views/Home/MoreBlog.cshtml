@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Website_Panda.Models.Blog>
+
+@foreach (var item in Model)
+{
+    <div class="product-googles-info googles">
+        <div class="men-thumb-item">
+            <img src="~/Images/@item.Image" class="img-fluid" alt=@item.Image>
+        </div>
+        <div class="item-info-product">
+            <div class="info-product-price">
+                <div class="grid_meta">
+                    <div class="product_price">
+                        <h4>
+                            <a href="/Home/BlogDetail/@item.IDBlog">@Html.DisplayFor(model => item.Title) </a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+}

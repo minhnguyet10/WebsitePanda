@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Website_Panda.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 style="text-align:center">
+                    PRODUCTS
+                </h2>
+            </div>
+            <div class="row form-group">
+                @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+                {
+                    <div class="col-lg-12">
+                        <a class="btn btn-warning" href="/Product/Create" style="margin-left:50px; margin-top:20px;">Create New</a>
+                    </div>
+                }
+            </div>
+            <div class="table-responsive">
+                <table id="myTable" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProductName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Image)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Price)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PromotionPrice)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Quantity)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Color)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Brand.BrandName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Category.CategoryName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CreatedDate)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    @foreach (var item in Model)
+                    {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+
+                    <td>
+                        <img src="~/Images/@item.Image" style="width:50px; height:50px" />
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PromotionPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand.BrandName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDProduct }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.IDProduct }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IDProduct })
+                    </td>
+                </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                responsive: true,
+                retrieve: true,
+                "lengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]]
+            });
+          
+        });
+    </script>
+}
+
+

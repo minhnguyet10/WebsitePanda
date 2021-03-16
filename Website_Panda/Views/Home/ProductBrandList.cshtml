@@ -1,0 +1,171 @@
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Website_Panda.Models.Product>
+
+@{
+   
+    foreach (var item in Model)
+    {
+
+        ViewBag.Title = item.Brand.BrandName;
+        ViewBag.Keywords = item.Brand.BrandID;
+        ViewBag.Descriptions = item.Brand.Note;
+    }
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+    <div class="banner_inner">
+
+        <div class="services-breadcrumb">
+            <div class="inner_breadcrumb">
+
+                <ul class="short">
+                    <li>
+                        <a href="~/Home/Index">Home</a>
+                        <i>|</i>
+                    </li>
+                    <li>Brands list</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+<div class="ht__bradcaump__area bg-image--6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <h2 class="tittle-w3layouts text-center my-lg-4 my-4">Brands</h2>                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<br />
+<!-- Start Shop Page -->
+<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
+                <div class="shop__sidebar">
+                    <aside class="wedget__categories poroduct--cat">
+                        @using (Html.BeginForm("AllProduct", "Home"))
+                        {
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    @Html.TextBox("search", null, null, new { @class = "form-control", @type = "search", placeholder = "Search here...", required = "" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <input type="submit" value="Search" class="btn btn-default" />
+
+                                </div>
+                            </div>
+                        }
+
+                    </aside>
+                 
+                    <aside class="wedget__categories poroduct--cat" style="padding-left:5px;">
+                        <div class="range" style="width: 100%; height:auto;">
+                            <h3 class="agileits-sear-head">Price range</h3>
+                            <div class="row">
+                                <div class="col-lg-11">
+                                    <ul class="dropdown-menu6">
+                                        <li>
+                                            <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+                                                <div class="ui-slider-range ui-widget-header" style="left: 0.555556%;"></div>
+                                                <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.555556%;"></a>
+                                                <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 40.9556%;"></a>
+                                            </div>
+                                            <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal; font-size:large;">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                    <br />
+                    <aside class="wedget__categories poroduct--cat">
+                        <h3 class="wedget__title">Brand</h3>
+                        @{ Html.RenderAction("BrandList", "Home");}
+                    </aside>
+                </div>
+            </div>
+            <div class="col-lg-9 col-12 order-1 order-lg-2">               
+                <div class="row" id="products">
+                    @foreach (Website_Panda.Models.Product item in Model)
+                    {
+                        if(item.Quantity > 0)
+                        {
+                            <div class="col-md-4 product-men women_two shop-gd" data-price="@item.Price">
+                                <div class="product-googles-info googles" data-price="@item.Price">
+                                    <div class="men-pro-item" id="products" data-price="@item.Price">
+                                        <div class="men-thumb-item" data-price="@item.Price">
+                                            <img src="~/Images/@item.Image" class="img-fluid" alt="@item.Image">
+                                            <div class="men-cart-pro" data-price="@item.Price">
+                                                <div class="inner-men-cart-pro" data-price="@item.Price">
+                                                    <a href="/Home/ProductDetail/@item.IDProduct" class="link-product-add-cart">Quick View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-info-product" data-price="@item.Price">
+                                            <div class="info-product-price" data-price="@item.Price">
+                                                <div class="grid_meta" data-price="@item.Price">
+                                                    <div class="product_price" data-price="@item.Price">
+                                                        <h4>
+                                                            <a href="single.html">@Html.DisplayFor(modelItem => item.ProductName) </a>
+                                                        </h4>
+                                                        @if (item.PromotionPrice <= 0 || item.PromotionPrice == null)
+                                                        {
+                                                            <div class="grid-price mt-2" data-price="@item.Price">
+                                                                <span class="money ">@Html.DisplayFor(modelItem => item.Price)$</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="grid-price mt-2" data-price="@item.Price">
+                                                                <span class="money ">@Html.DisplayFor(modelItem => item.PromotionPrice)$</span>
+                                                                <span class="item_price" style="text-decoration: line-through; opacity: 40%">@Html.DisplayFor(modelItem => item.Price)$</span>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                                @*@if (item.Quantity <= 0 || item.Quantity == null)
+                                                {
+                                                    <a style="padding-top:1em;">Out of stock!</a>
+                                                }
+                                                else
+                                                {*@
+                                                <div class="googles single-item hvr-outline-out" data-price="@item.Price">
+                                                    <div class="row" style="padding-top:1em;" data-price="@item.Price">
+                                                        <div class="col-sm-6" data-price="@item.Price">
+                                                            <a href="/ShoppingCart/AddtoCart/@item.IDProduct">
+                                                                <img src="@Url.Content("~/Content/Assets/Img/cart.png")" style="height:20px; width:20px; margin-left: -10px;" alt="@item.Image" />
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="col-sm-6" data-price="@item.Price">
+                                                            <a href="/WishList/AddToWishList/@item.IDProduct">
+                                                                <img src="@Url.Content("~/Content/Assets/Img/heart.png")" style="height:20px; width:20px" alt="@item.Image" />
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @*}*@
+                                            </div>
+                                            <div class="clearfix" data-price="@item.Price"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <ul class="wn__pagination">
+                    @Html.PagedListPager(Model, sotrang => Url.Action("AllProduct", "Home", new { page = sotrang }))
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

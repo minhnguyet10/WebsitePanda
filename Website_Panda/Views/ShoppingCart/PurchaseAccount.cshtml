@@ -1,0 +1,45 @@
+﻿@model Website_Panda.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+
+
+<section class="wn_contact_area bg--white pt--80">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="contact-form-wrap">
+                    
+                    @using (Html.BeginForm("PurchaseAccount", "ShoppingCart"))
+                    {
+                <form id="contact-form" method="post">
+                    <div class="single-contact-form space-between">
+                        <label class="control-label">FirstName </label>
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                        <label class="control-label">LastName </label>
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    </div>
+                    <div class="single-contact-form space-between">
+                        <label class="control-label">Email </label>
+                        @Html.EditorFor(model => model.Email_Cus, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                        <label class="control-label">Phone </label>
+                        @Html.EditorFor(model => model.Phone_Cus, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    </div>
+                    <div class="single-contact-form message">
+                        <label class="control-label">Address </label>
+                        @Html.EditorFor(model => model.Address_Cus, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    </div>
+                    
+                </form>
+
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</section>
